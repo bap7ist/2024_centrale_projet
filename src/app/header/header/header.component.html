@@ -1,0 +1,34 @@
+<div class="header">
+  <div class="title">
+    <div (click)="onBurgerClick()" class="burger-container">
+      @if (isOpen) {
+      <img class="burger" src="../../../assets/close.png" alt="" />
+      }@else {
+      <img class="burger" src="../../../assets/burger-bar.png" alt="" />
+      }
+    </div>
+
+    <img
+      [routerLink]="['/']"
+      routerLinkActive="router-link-active"
+      class="logo"
+      src="../../../assets/logoUber.svg"
+      alt=""
+    />
+  </div>
+  @if(!isConnected) {
+  <div class="buttons">
+    @for (item of boutonsHeader; track $index) {
+    <a
+      class="button {{ item.isDark ? 'b-2' : 'b-1' }}"
+      [routerLink]="item.url"
+      >{{ item.name }}</a
+    >
+    }
+  </div>
+  } @else {
+  <div (click)="goToProfile()" class="profile">
+    <h3>{{ userLetters }}</h3>
+  </div>
+  }
+</div>

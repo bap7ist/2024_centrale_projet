@@ -1,0 +1,51 @@
+<div class="inscription-container">
+  @if (inscriptionError) {
+  <div @slideFromTop class="warning-box error">
+    <h3>Une erreur est survenue ...</h3>
+    <p>{{ inscriptionError.message }}</p>
+  </div>
+  }
+  <form
+    [formGroup]="inscriptionForm"
+    class="inscription-form"
+    (submit)="inscription()"
+  >
+    <input
+      [ngClass]="{ invalid: isInvalidField('firstName') }"
+      placeholder="Prénom"
+      type="text"
+      formControlName="firstName"
+    />
+    <input
+      [ngClass]="{ invalid: isInvalidField('lastName') }"
+      placeholder="Nom"
+      type="text"
+      formControlName="lastName"
+    />
+    <input
+      [ngClass]="{ invalid: isInvalidField('email') }"
+      placeholder="Email"
+      type="email"
+      formControlName="email"
+    />
+    <input
+      [ngClass]="{ invalid: isInvalidField('password') }"
+      placeholder="Mot de passe"
+      type="password"
+      formControlName="password"
+    />
+    <button class="btn-1" type="submit">
+      @if (chargementEnCours) {
+      <div class="loader"></div>
+      } @else {
+      <h3>Inscription</h3>
+      }
+    </button>
+    <div class="ou-ligne">
+      <div class="ligne"></div>
+      <p>ou</p>
+      <div class="ligne"></div>
+    </div>
+    <a [routerLink]="['/connexion']">se connecter</a>
+  </form>
+</div>

@@ -1,0 +1,10 @@
+<div class="header">
+  <app-header (isOpenEmitter)="isSideNavOpen = !isSideNavOpen"></app-header>
+</div>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
+
+@if (isSideNavOpen) {
+<div @slideInFromLeft class="side-nav"></div>
+}

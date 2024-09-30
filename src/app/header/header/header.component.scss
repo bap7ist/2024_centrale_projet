@@ -1,0 +1,78 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  height: 65px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    gap: 1rem;
+
+    .logo {
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .burger-container {
+      height: 40px;
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgb(235, 235, 235);
+
+      }
+
+      .burger {
+        height: 50%;
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-right: 3rem;
+    align-items: center;
+
+    .button {
+      text-decoration: inherit;
+      height: fit-content;
+      padding: 0.5rem;
+      border-radius: 20px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+      &.b-2 {
+        background-color: black;
+        color: white;
+      }
+      &.b-1 {
+        background-color: white;
+        color: black;
+      }
+    }
+  }
+
+  .profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(221, 221, 221);
+    cursor: pointer;
+  }
+}

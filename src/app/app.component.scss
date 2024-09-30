@@ -1,0 +1,17 @@
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+}
+
+.side-nav {
+    background-color: white;
+  position: fixed;
+  height: 100vh;
+  width: 30%;
+}

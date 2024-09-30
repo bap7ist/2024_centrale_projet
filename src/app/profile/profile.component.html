@@ -1,0 +1,11 @@
+<div class="profile-container">
+  <div class="profile-picture">
+    <h1>{{ user.firstName[0] }}{{ user.lastName[0] }}</h1>
+  </div>
+  <form [formGroup]="profileForm" class="profile-form">
+    <input formControlName="firstName" type="text" />
+    <input formControlName="lastName" type="text" />
+    <input formControlName="email" type="text" />
+  </form>
+  <button (click)="deconnexion()" class="btn-1">se déconnecter</button>
+</div>
