@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { UserService } from '../services/user.service';
-import { tap } from 'rxjs';
-import { User } from '../types/user.interface';
-import { AuthService } from '../services/auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -13,40 +9,9 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
-  public profileForm: FormGroup;
+  public constructor() {}
 
-  public user: User;
+  public ngOnInit(): void {}
 
-  public constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
-    private authService: AuthService
-  ) {
-    this.profileForm = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      email: [''],
-      favouriteRestaurants: [[]],
-    });
-  }
-
-  public ngOnInit(): void {
-    this.loadUserProfile();
-  }
-
-  private loadUserProfile(): void {
-    this.userService
-      .getUser()
-      .pipe(
-        tap((user) => {
-          this.user = user;
-          this.profileForm.patchValue(user);
-        })
-      )
-      .subscribe();
-  }
-
-  public deconnexion(): void {
-    this.authService.logout();
-  }
+  public deconnexion(): void {}
 }

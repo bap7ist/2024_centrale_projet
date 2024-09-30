@@ -1,18 +1,5 @@
 <div class="connexion-container">
-  @if (succesInscription) {
-  <div class="warning-box succes">
-    <h3>Bienvenue {{ succesInscription.name }} !</h3>
-    <p>Vous pouvez dès maintenant vous connecter.</p>
-  </div>
-  }
-  <form [formGroup]="loginForm" class="connexion-form" (submit)="connexion()">
+  <form class="connexion-form">
     <h3>Se connecter</h3>
-    <input formControlName="email" placeholder="Email" type="email" />
-    <input
-      formControlName="password"
-      placeholder="Mot de passe"
-      type="password"
-    />
-    <button type="submit" class="btn-1">Connexion</button>
   </form>
 </div>

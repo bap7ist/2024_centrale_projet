@@ -1,8 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { tap } from 'rxjs';
-import { UserService } from '../../services/user.service';
 
 export interface boutonHeader {
   id: number;
@@ -18,7 +15,7 @@ export interface boutonHeader {
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   @Output() public isOpenEmitter = new EventEmitter<boolean>();
 
   public isOpen: boolean = false;
@@ -40,28 +37,7 @@ export class HeaderComponent implements OnInit {
     },
   ];
 
-  public isConnected: boolean = false;
-
-  public constructor(
-    private authService: AuthService,
-    private userService: UserService,
-    private router: Router
-  ) {}
-
-  public ngOnInit(): void {
-    this.isConnected = this.authService.isAuthenticated();
-
-    if (this.isConnected) {
-      this.userService
-        .getUser()
-        .pipe(
-          tap((user) => {
-            this.userLetters = user.firstName[0] + user.lastName[0];
-          })
-        )
-        .subscribe();
-    }
-  }
+  public constructor(private router: Router) {}
 
   public onBurgerClick(): void {
     this.isOpen = !this.isOpen;

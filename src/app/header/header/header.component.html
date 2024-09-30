@@ -16,7 +16,6 @@
       alt=""
     />
   </div>
-  @if(!isConnected) {
   <div class="buttons">
     @for (item of boutonsHeader; track $index) {
     <a
@@ -26,9 +25,4 @@
     >
     }
   </div>
-  } @else {
-  <div (click)="goToProfile()" class="profile">
-    <h3>{{ userLetters }}</h3>
-  </div>
-  }
 </div>
