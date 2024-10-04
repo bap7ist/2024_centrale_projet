@@ -34,3 +34,22 @@ export const slideInFromLeft = trigger('slideInFromLeft', [
     ),
   ]),
 ]);
+
+export const slideInFromRight = trigger('slideInFromRight', [
+  transition(':enter', [
+    // L'élément entre depuis la droite (translateX(100%))
+    style({ transform: 'translateX(100%)', opacity: 0 }),
+    // L'animation le fait revenir à sa position normale
+    animate(
+      '300ms ease-out',
+      style({ transform: 'translateX(0)', opacity: 1 })
+    ),
+  ]),
+  transition(':leave', [
+    // L'élément sort vers la droite (translateX(100%))
+    animate(
+      '300ms ease-in',
+      style({ transform: 'translateX(100%)', opacity: 0 })
+    ),
+  ]),
+]);

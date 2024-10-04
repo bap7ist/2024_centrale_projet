@@ -1,4 +1,9 @@
-@if (detailRestaurant) {
+@if (enregistrementTermine) {
+<app-alert
+  [title]="'Enregistrement'"
+  [message]="'Profile enregistré avec succès'"
+></app-alert>
+} @if (detailRestaurant) {
 <div class="detail-restaurant-wrapper">
   <div (click)="detailRestaurant = null" class="close">
     <img src="../../assets/close.png" alt="" />

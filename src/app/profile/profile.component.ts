@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../services/user.service';
-import { combineLatest, map, take, tap } from 'rxjs';
+import { combineLatest, finalize, map, switchMap, take, tap } from 'rxjs';
 import { User, userRequest } from '../types/user.interface';
 import { AuthService } from '../services/auth.service';
 import { ReferentielService } from '../services/referentiel.service';
 import { Restaurant } from '../types/restaurant.interface';
 import { RatingComponent } from '../rating/rating.component';
 import { DatePipe } from '@angular/common';
+import { AlertComponent } from '../alert/alert.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [ReactiveFormsModule, RatingComponent, DatePipe],
+  imports: [ReactiveFormsModule, RatingComponent, DatePipe, AlertComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
@@ -23,11 +24,15 @@ export class ProfileComponent implements OnInit {
 
   public restaurants: Restaurant[];
 
+  public chargementEnCours: boolean;
+
   public restaurantsFiltered: Restaurant[];
 
   public restauChoisis: Restaurant[] = [];
 
   public detailRestaurant: Restaurant | null = null;
+
+  public enregistrementTermine: boolean;
 
   public constructor(
     private fb: FormBuilder,
@@ -107,6 +112,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public enregistrerModifications(): void {
+    this.chargementEnCours = true;
     const userRequest: User = {
       firstName: this.profileForm.get('firstName')?.value,
       lastName: this.profileForm.get('lastName')?.value,
@@ -114,7 +120,21 @@ export class ProfileComponent implements OnInit {
       favoriteRestaurants: this.restauChoisis,
       profilePicture: null,
     };
-    this.userService.updateUser(userRequest).pipe(take(1)).subscribe();
+    this.userService
+      .updateUser(userRequest)
+      .pipe(
+        take(1),
+        tap((res) => {
+          if (res) {
+            this.enregistrementTermine = true;
+            setTimeout(() => {
+              this.enregistrementTermine = false;
+            }, 3000);
+          }
+        }),
+        finalize(() => (this.chargementEnCours = false))
+      )
+      .subscribe();
   }
 
   /**
