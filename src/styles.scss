@@ -4,6 +4,15 @@
   font-family: "poppins", sans-serif; /* Appliquer la police Roboto à toute l'application */
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+}
+
 h1,
 h2,
 h3 {
@@ -24,6 +33,15 @@ input {
   &.invalid {
     border: 2px solid red;
   }
+}
+
+select {
+  height: 2.5rem;
+  border: none;
+  background-color: rgb(239, 239, 239);
+  border-radius: 8px;
+  padding-inline: 1rem;
+  cursor: pointer;
 }
 
 button {
@@ -82,5 +100,52 @@ button {
   }
   &.error {
     background-color: rgb(239, 72, 72);
+  }
+}
+
+$i: 0;
+@while $i < 100 {
+  $i: $i + 1;
+  .gap-#{$i} {
+    gap: #{$i}#{"rem"};
+  }
+
+  .gap-0#{$i} {
+    gap: #{"0." + $i + "rem"};
+  }
+
+  .w-#{$i} {
+    width: #{$i}#{"%"};
+  }
+}
+
+.badge {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.3rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  gap: 1rem;
+  background-color: rgb(86, 134, 86);
+  color: white;
+  border-radius: 20px;
+  width: fit-content;
+  cursor: pointer;
+
+  p {
+    font-size: 0.7rem;
+    white-space: pre;
+  }
+
+  .close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    height: 100%;
+    img {
+      height: 7px;
+    }
   }
 }

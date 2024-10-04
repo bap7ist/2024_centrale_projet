@@ -1,11 +1,83 @@
+@if (detailRestaurant) {
+<div class="detail-restaurant-wrapper">
+  <div (click)="detailRestaurant = null" class="close">
+    <img src="../../assets/close.png" alt="" />
+  </div>
+  <div class="detail-restaurant-pop-in">
+    <h3>{{ detailRestaurant.name }}</h3>
+    <p>Adresse: {{ detailRestaurant.adresse }}</p>
+    <app-rating [rate]="detailRestaurant.note"></app-rating>
+    <div class="tous-avis">
+      @for (com of detailRestaurant.avis; track $index) {
+      <div class="avis">
+        <h4>{{ com.user }}</h4>
+        <p>Le {{ com.date | date : "fullDate" : "fr-FR" }}</p>
+        <app-rating [rate]="com.note"></app-rating>
+        <p>{{ com.com }}</p>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+}
+
 <div class="profile-container">
   <div class="profile-picture">
+    @if (user) {
     <h1>{{ user.firstName[0] }}{{ user.lastName[0] }}</h1>
+    }
   </div>
   <form [formGroup]="profileForm" class="profile-form">
-    <input formControlName="firstName" type="text" />
-    <input formControlName="lastName" type="text" />
-    <input formControlName="email" type="text" />
+    <div class="column gap-1">
+      <input id="firstName" formControlName="firstName" type="text" />
+      <input formControlName="lastName" type="text" />
+      <input formControlName="email" type="text" />
+    </div>
+
+    <div class="line"></div>
+
+    <div class="restaurant-container">
+      <h3>Mes restaurants :</h3>
+      @if (restauChoisis && restauChoisis.length > 0) {
+      <div class="restaurants-choisis">
+        @for (restau of restauChoisis; track $index) {
+        <div class="badge">
+          <div (click)="openRestaurant(restau)" class="">
+            <p>{{ restau.name }}</p>
+          </div>
+          <div (click)="deleteRestaurant(restau)" class="close">
+            <img src="../../assets/close.png" alt="close" />
+          </div>
+        </div>
+        }
+      </div>
+      }
+      <div class="input-wrapper">
+        <input
+          class="w-70"
+          #inputSearch
+          placeholder="Cherchez..."
+          type="text"
+          (input)="searchRestaurants($event)"
+        />
+        <p (click)="voirTout()">voir tout</p>
+      </div>
+      @if (restaurantsFiltered && restaurantsFiltered.length > 0) {
+      <div class="restaurant-search">
+        @for (restau of restaurantsFiltered; track $index) {
+        <div (click)="onRestauClick(restau)" class="restau">
+          <p>{{ restau.name }}</p>
+        </div>
+        }
+      </div>
+      } @else { @if(inputSearch.value) {
+      <p>Aucun restaurant trouvé...</p>
+      } }
+    </div>
   </form>
-  <button (click)="deconnexion()" class="btn-1">se déconnecter</button>
+  <div class="row gap-1">
+    <button (click)="deconnexion()" class="btn-1">se déconnecter</button>
+    <button (click)="enregistrerModifications()">Enregistrer</button>
+    <!-- <button (click)="addMultipleRestaurants()">res</button> -->
+  </div>
 </div>

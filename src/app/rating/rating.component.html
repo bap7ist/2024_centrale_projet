@@ -1,0 +1,5 @@
+<div class="rating">
+  @for (rate of rating; track $index) {
+  <div [ngClass]="{ good: rate }" class="rate"></div>
+  }
+</div>

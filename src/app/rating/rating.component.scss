@@ -1,0 +1,14 @@
+.rating {
+    display: flex;
+    gap: 0.2rem;
+    .rate {
+    height: 7px;
+    width: 7px;
+    border: 2px solid black;
+    border-radius: 50%;
+
+    &.good {
+      background-color: black;
+    }
+  }
+}
